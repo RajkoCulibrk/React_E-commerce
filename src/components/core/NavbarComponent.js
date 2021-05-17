@@ -1,9 +1,12 @@
 import React from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 const NavbarComponent = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+      <Navbar.Brand as={Link} to="/">
+        MyShop
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -22,9 +25,11 @@ const NavbarComponent = () => {
           </NavDropdown>
         </Nav>
         <Nav>
-          <Nav.Link href="#deets">More deets</Nav.Link>
-          <Nav.Link eventKey={2} href="#memes">
-            Dank memes
+          <Nav.Link as={Link} to="login" href="#deets">
+            Login
+          </Nav.Link>
+          <Nav.Link as={Link} to="register" eventKey={2} href="#memes">
+            Register
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

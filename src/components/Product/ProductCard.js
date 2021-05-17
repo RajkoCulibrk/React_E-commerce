@@ -4,7 +4,10 @@ import { Button, Card } from "react-bootstrap";
 const ProductCard = () => {
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Img
+        variant="top"
+        src="https://res.cloudinary.com/dui23wclz/image/upload/v1620807599/tye5n3ewxrygyclhfne2.jpg"
+      />
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
         <Card.Text>
