@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-/* import { toast } from "react-toastify"; */
+
 import axios from "../../Utility/axiosConfiguration";
 /* login thunk returns auth token */
 export const login = createAsyncThunk(
@@ -11,7 +11,7 @@ export const login = createAsyncThunk(
       /* set token to localstorage */
       localStorage.setItem("token", response.data.data);
       console.log(response.data.data);
-      /*  dispatch(getUser()); */
+      dispatch(getUserData());
       /* display wellcome message */
       toast.info("Wellcome !", {
         position: toast.POSITION.BOTTOM_CENTER
@@ -36,7 +36,7 @@ export const register = createAsyncThunk(
       /* set token to localstorage */
       localStorage.setItem("token", response.data.data);
       console.log(response.data.data);
-      /*  dispatch(getUser()); */
+      dispatch(getUserData());
       /* display wellcome message */
       /*    toast.info("Wellcome !", {
           position: toast.POSITION.BOTTOM_CENTER
@@ -44,6 +44,25 @@ export const register = createAsyncThunk(
       return response.data.data;
     } catch (err) {
       localStorage.removeItem("token");
+      if (err.response?.data.msg) {
+        return rejectWithValue(err.response.data.message);
+      }
+
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const getUserData = createAsyncThunk(
+  "user/getUserData",
+  async (data, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await axios.get("users", data);
+      localStorage.setItem("user", JSON.stringify(response.data.data));
+      return response.data.data;
+    } catch (err) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       if (err.response?.data.msg) {
         return rejectWithValue(err.response.data.message);
       }

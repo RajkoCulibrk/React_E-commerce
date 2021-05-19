@@ -3,7 +3,7 @@ import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 const NavbarComponent = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect className="navbar" sticky="top" expand="lg">
       <Navbar.Brand as={Link} to="/">
         MyShop
       </Navbar.Brand>

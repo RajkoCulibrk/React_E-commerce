@@ -1,22 +1,25 @@
 import React from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img
-        variant="top"
-        src="https://res.cloudinary.com/dui23wclz/image/upload/v1620807599/tye5n3ewxrygyclhfne2.jpg"
-      />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
+    <Link
+      to={"/product/" + product.productId}
+      style={{ textDecoration: "none", color: "initial" }}
+    >
+      <Card className="m-2 product__card rounded">
+        <Card.Img variant="top" src={product.publicUrl} />
+        <Card.Body className="text-center">
+          <Card.Title>{product.name}</Card.Title>
+          <Card.Text style={{ height: "50px" }}>
+            {product.description}
+          </Card.Text>
+          <Card.Text className="font-italic">{product.price} $</Card.Text>
+          <Button variant="primary">Add to cart</Button>
+        </Card.Body>
+      </Card>
+    </Link>
   );
 };
 

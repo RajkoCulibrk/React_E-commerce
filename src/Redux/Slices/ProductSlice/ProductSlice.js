@@ -1,20 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, register } from "../Actions/UserActions";
+
 import builderCases from "./BuilderCases";
-const tokenFromStorrage = localStorage.getItem("token");
-const userFromStorrage = localStorage.getItem("user");
 
 const initialState = {
-  user: userFromStorrage,
-  token: tokenFromStorrage,
-  errors: [],
-  gettingToken: false,
-  loadingUser: false
+  products: [],
+  count: 0,
+  loadingProducts: false
 };
 
-export const userSlice = createSlice({
+export const productSlice = createSlice({
   name: "user",
   initialState,
+  loadingProducts: false,
   reducers: {
     increment: (state) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -30,6 +27,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementByAmount } = userSlice.actions;
+export const { incrementByAmount } = productSlice.actions;
 
-export default userSlice.reducer;
+export default productSlice.reducer;
