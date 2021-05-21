@@ -1,15 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 /* import { toast } from "react-toastify"; */
 import axios from "../../Utility/axiosConfiguration";
-
-export const getProducts = createAsyncThunk(
-  "product/getProducts",
+export const getCartItems = createAsyncThunk(
+  "cart/getCartItems",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      const response = await axios.get("products");
+      const response = await axios.get("cart");
 
       console.log(response.data);
-      return response.data;
+      return response.data.data;
     } catch (err) {
       if (err.response?.data.msg) {
         return rejectWithValue(err.response.data.message);

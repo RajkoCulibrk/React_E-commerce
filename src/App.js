@@ -11,6 +11,7 @@ import { getUserData } from "./Redux/Actions/UserActions";
 import { getCategories } from "./Redux/Actions/CategoryActions";
 import Footer from "./components/core/Footer";
 import Product from "./Pages/Product";
+import Cart from "./Pages/Cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/product/:id" component={Product} />
+            <Route path="/cart" component={Cart} />
             <Route path="/" component={Home} />
           </Switch>
         </main>
