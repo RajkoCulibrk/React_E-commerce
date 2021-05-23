@@ -1,11 +1,9 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-
 import SideNav from "../components/core/SideNav";
-
 import ProductGalery from "../components/Product/ProductGalery";
 
-const Home = () => {
+const ManageProducts = () => {
   return (
     <Container className="homepage" fluid>
       <Row className="kurac">
@@ -20,4 +18,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ManageProducts;

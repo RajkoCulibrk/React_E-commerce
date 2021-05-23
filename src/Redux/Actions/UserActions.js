@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 import axios from "../../Utility/axiosConfiguration";
+import { getCartItems } from "./CartActions";
 /* login thunk returns auth token */
 export const login = createAsyncThunk(
   "user/login",
@@ -59,6 +60,7 @@ export const getUserData = createAsyncThunk(
     try {
       const response = await axios.get("users", data);
       localStorage.setItem("user", JSON.stringify(response.data.data));
+      dispatch(getCartItems());
       return response.data.data;
     } catch (err) {
       localStorage.removeItem("token");

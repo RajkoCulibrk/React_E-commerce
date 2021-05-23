@@ -6,7 +6,7 @@ import { login } from "../Redux/Actions/UserActions";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [data, handleChange, errors] = useInput();
+  const [data, handleChange] = useInput();
   const [touched, setTouched] = useState({
     email: false,
     password: false

@@ -4,7 +4,7 @@ import axios from "../../Utility/axiosConfiguration";
 
 export const getProducts = createAsyncThunk(
   "product/getProducts",
-  async (data, { rejectWithValue, dispatch }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.get("products");
 

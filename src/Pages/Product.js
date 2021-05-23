@@ -1,26 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import {
-  Button,
-  ButtonGroup,
-  Carousel,
-  Col,
-  Container,
-  Row
-} from "react-bootstrap";
+import { Button, Carousel, Col, Container, Row } from "react-bootstrap";
 import ProductPolicy from "../components/Product/ProductPolicy";
 import useFetchSingleProduct from "../Hooks/FetchSingleProductHook";
 import { useParams } from "react-router";
+import useCheckIfInCart from "../Hooks/CheckIfInCart";
+import { useSelector } from "react-redux";
+
+import useHandleAddToCart from "../Hooks/UseAddRemoveFromCart";
+import AmmountRegulator from "../components/Cart/AmmountRegulator";
 const Product = () => {
   const { id } = useParams();
+  const { cart } = useSelector((state) => state);
+  const cartItem = cart.cartItems.find((ci) => ci.product.productId == id);
+
   const { data, fetchProduct } = useFetchSingleProduct();
-  const { product } = data;
+  const { product, loadingProduct } = data;
+  const isInCart = useCheckIfInCart(id);
+  const { handleAddToCart } = useHandleAddToCart();
+  const [ammount, setAmmount] = useState(isInCart ? cartItem.ammount : 1);
+
+  const handleAddToCartButton = () => {
+    if (isInCart) {
+      handleAddToCart(product, 0);
+    } else {
+      handleAddToCart(product, ammount);
+    }
+  };
 
   useEffect(() => {
     fetchProduct(id);
@@ -53,36 +64,39 @@ const Product = () => {
                 </Button>
               </Col>
               <Col xs={6}>
-                <Button variant="warning" size="lg" block>
+                <Button
+                  variant={isInCart ? "success" : "warning"}
+                  size="lg"
+                  block
+                  onClick={() => handleAddToCartButton()}
+                >
                   <FontAwesomeIcon icon={faCartPlus} />
                 </Button>
               </Col>
             </Row>
           </div>
         </Col>
-        <Col xs={12} md={6}>
+        <Col xs={12} md={6} className="d-flex flex-column ">
           <h4 className="p-3">{product?.name}</h4>
 
           <div className="product__price border-dark border-top border-bottom p-3">
             <div>Cena: {product?.price} $</div>
             <div>Shipping: Free</div>
-            <div>Category: {product?.category.name}</div>
+            <div>Category: {product?.category?.name}</div>
           </div>
           <div className="product__policies border-dark border-top border-bottom d-flex justify-content-around p-3">
             <ProductPolicy icon={faTruck} text="Shipment within two days" />
             <ProductPolicy icon={faCheckDouble} text="Original waranty" />
             <ProductPolicy icon={faExchangeAlt} text="Return policy 10 days" />
           </div>
-          <div className="product__qty d-flex justify-content-center p-3">
-            <ButtonGroup className="w-50 ">
-              <Button variant="secondary">
-                <FontAwesomeIcon icon={faChevronUp} />
-              </Button>
-              <div className="text-center w-50 ">12</div>
-              <Button variant="secondary">
-                <FontAwesomeIcon icon={faChevronDown} />
-              </Button>
-            </ButtonGroup>
+          <div className="product__qty d-flex justify-content-center p-3 w-50 align-self-center">
+            {!loadingProduct && (
+              <AmmountRegulator
+                product={product}
+                ammount={ammount}
+                setAmmount={setAmmount}
+              />
+            )}
           </div>
           <div className="product__description p-3">
             <h5>Description</h5>

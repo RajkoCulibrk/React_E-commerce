@@ -1,19 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import builderCases from "./BuilderCases";
-const tokenFromStorrage = localStorage.getItem("token");
-const userFromStorrage = localStorage.getItem("user");
 
 const initialState = {
-  user: userFromStorrage,
-  token: tokenFromStorrage,
-  errors: [],
-  gettingToken: false,
-  loadingUser: false
+  ammount: 1
 };
 
-export const userSlice = createSlice({
-  name: "user",
+export const utilitySlice = createSlice({
+  name: "uility",
   initialState,
   reducers: {
     increment: (state) => {
@@ -30,6 +24,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementByAmount } = userSlice.actions;
+export const { incrementByAmount } = utilitySlice.actions;
 
-export default userSlice.reducer;
+export default utilitySlice.reducer;

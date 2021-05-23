@@ -12,13 +12,20 @@ import { getCategories } from "./Redux/Actions/CategoryActions";
 import Footer from "./components/core/Footer";
 import Product from "./Pages/Product";
 import Cart from "./Pages/Cart";
+import AddProduct from "./Pages/AddProduct";
+import ManageProducts from "./Pages/ManageProducts";
+import UpdateProduct from "./Pages/UpdateProduct";
 
 function App() {
+  if (!localStorage.getItem("cart")) {
+    localStorage.setItem("cart", JSON.stringify([]));
+  }
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserData());
+
     dispatch(getCategories());
-  }, []);
+  }, [dispatch]);
   return (
     <Router>
       <div className="App">
@@ -30,6 +37,11 @@ function App() {
             <Route path="/register" component={Register} />
             <Route path="/product/:id" component={Product} />
             <Route path="/cart" component={Cart} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/addProduct" component={AddProduct} />
+            <Route path="/updateProduct/:id" component={UpdateProduct} />
+            <Route path="/manageProducts" component={ManageProducts} />
+
             <Route path="/" component={Home} />
           </Switch>
         </main>

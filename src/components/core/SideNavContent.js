@@ -6,8 +6,8 @@ const SideNavContent = () => {
     <div className="position-sticky sidenav-content d-flex flex-column ">
       <h5 className="text-center">Categories</h5>
       <div className="sidenav-content__categories d-flex flex-column">
-        {categories.categories.map((category) => (
-          <span className="sidenav-content__categories__category">
+        {categories.categories.map((category, index) => (
+          <span key={index} className="sidenav-content__categories__category">
             {category.name}
           </span>
         ))}

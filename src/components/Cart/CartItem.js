@@ -1,15 +1,24 @@
-import React from "react";
-import { ButtonGroup, Col, Container, Row, Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+
+import AmmountRegulator from "./AmmountRegulator";
+import { Link } from "react-router-dom";
 
 const CartItem = ({ cartItem }) => {
+  const [ammount, setAmmount] = useState(cartItem.ammount);
+
   return (
-    <Container>
+    <Container className="mt-2">
       <Row>
         <Col sm={4}>
-          <img width="150px" src={cartItem.product.publicUrl} alt="slika" />
+          <Link to={"/product/" + cartItem.product.productId}>
+            <img
+              width="150px"
+              className="rounded"
+              src={cartItem.product.publicUrl}
+              alt="slika"
+            />
+          </Link>
         </Col>
         <Col sm={8}>
           <Row>
@@ -17,18 +26,14 @@ const CartItem = ({ cartItem }) => {
               <h5>{cartItem.product.name}</h5>
               <p>{cartItem.product.description}</p>
               <p>price: {cartItem.product.price} $</p>
-              <p>category:kurcina</p>
+              <p>category: {cartItem.product?.category?.name}</p>
             </Col>
             <Col sm={4} className="d-flex align-items-center">
-              <ButtonGroup className="w-100">
-                <Button variant="secondary">
-                  <FontAwesomeIcon icon={faChevronUp} />
-                </Button>
-                <div className="text-center w-50 ">12</div>
-                <Button variant="secondary">
-                  <FontAwesomeIcon icon={faChevronDown} />
-                </Button>
-              </ButtonGroup>
+              <AmmountRegulator
+                product={cartItem.product}
+                ammount={ammount}
+                setAmmount={setAmmount}
+              />
             </Col>
           </Row>
         </Col>

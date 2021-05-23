@@ -83,6 +83,13 @@ body {
 .carousel-indicators {
   filter: invert(100%);
 }
+
+/* cart icon */
+.cartIcon__number {
+  position: absolute !important;
+  top: -10px !important;
+  right: -10px !important;
+}
 @media screen and (max-width: 768px) {
   .product__card {
     width: 100%;
