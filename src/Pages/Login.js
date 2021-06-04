@@ -19,7 +19,7 @@ const Login = () => {
     <Container className="d-flex justify-content-center">
       <Form
         onSubmit={(e) => handleSubmit(e)}
-        className="w-50 d-flex flex-column"
+        className="w-50 d-flex flex-column  login_register_form"
       >
         <h3 className="text-center">Login</h3>
         <Form.Group controlId="formBasicEmail">

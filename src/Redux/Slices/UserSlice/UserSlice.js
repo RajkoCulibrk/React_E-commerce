@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 import builderCases from "./BuilderCases";
 const tokenFromStorrage = localStorage.getItem("token");
-const userFromStorrage = localStorage.getItem("user");
+const userFromStorrage = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   user: userFromStorrage,
@@ -16,12 +17,13 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    logout: (state) => {
+      state.user = null;
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      toast.info("Goodbye !", {
+        position: toast.POSITION.BOTTOM_CENTER
+      });
     }
   },
   extraReducers: (builder) => {
@@ -30,6 +32,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementByAmount } = userSlice.actions;
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

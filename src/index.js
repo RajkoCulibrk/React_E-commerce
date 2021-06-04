@@ -10,8 +10,7 @@ import { ToastContainer } from "react-toastify";
 ReactDOM.render(
   <React.StrictMode>
     <ToastContainer />
-    {/* Same as */}
-    <ToastContainer />
+
     <Provider store={store}>
       <App />
     </Provider>

@@ -5,6 +5,8 @@ import CartDetails from "../components/Cart/CartDetails";
 import CartItem from "../components/Cart/CartItem";
 import { getCartItems } from "../Redux/Actions/CartActions";
 import emptyCart from "../images/empty-cart.svg";
+import OrderDetails from "../components/Cart/OrderDetails";
+import useInput from "../Hooks/RegisterLoginHook";
 const Cart = () => {
   const dispatch = useDispatch();
   const {

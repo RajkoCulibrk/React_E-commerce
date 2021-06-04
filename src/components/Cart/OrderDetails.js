@@ -1,24 +1,12 @@
 import React from "react";
-import { Button, Col, Container, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import useInput from "../Hooks/RegisterLoginHook";
-import { register } from "../Redux/Actions/UserActions";
+import { Col, Form } from "react-bootstrap";
 
-const Register = () => {
-  const dispatch = useDispatch();
-  const [data, handleChange, errors, touched, setTouched] = useInput();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(register(data));
-  };
+const OrderDetails = ({ useInput }) => {
+  const { data, handleChange, errors, touched, setTouched } = useInput;
   return (
-    <Container fluid className="d-flex justify-content-center ">
-      <Form
-        onSubmit={(e) => handleSubmit(e)}
-        className="d-flex flex-column login_register_form"
-      >
-        <h3 className="text-center">Register</h3>
+    <div>
+      <Form className="d-flex flex-column mt-3 ">
+        <h4 className="text-center">Your Info</h4>
         <Form.Group>
           <Form.Label>First name</Form.Label>
           <Form.Control
@@ -77,7 +65,7 @@ const Register = () => {
           </Col>
           <Col xs={5}>
             <Form.Group>
-              <Form.Label>House Number </Form.Label>
+              <Form.Label> Number </Form.Label>
               <Form.Control
                 value={data.houseNumber}
                 className={`${
@@ -175,78 +163,9 @@ const Register = () => {
             </Form.Text>
           )}
         </Form.Group>
-        <Form.Group>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            value={data.password}
-            className={`${touched.password && !data.password && "is-invalid"}`}
-            onChange={(e) => handleChange(e)}
-            onBlur={() => setTouched({ ...touched, password: true })}
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
-
-          {touched.password && !data.password && (
-            <Form.Text className="invalid-feedback">
-              Provide your password.
-            </Form.Text>
-          )}
-          {touched.password && errors.passwordLength && (
-            <Form.Text className="text-danger">Password length.</Form.Text>
-          )}
-          {touched.password &&
-            errors.passwordMissmatch &&
-            touched.confirmPassword && (
-              <Form.Text className="text-danger">
-                Passwords do not match.
-              </Form.Text>
-            )}
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            value={data.confirmPassword}
-            className={`${
-              touched.confirmPassword && !data.confirmPassword && "is-invalid"
-            }`}
-            onChange={(e) => handleChange(e)}
-            onBlur={() => setTouched({ ...touched, confirmPassword: true })}
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-          />
-          {touched.confirmPassword && !data.confirmPassword && (
-            <Form.Text className="invalid-feedback">
-              Please confrim your password.
-            </Form.Text>
-          )}
-        </Form.Group>
-        <Button
-          disabled={
-            !data.firstName ||
-            !data.lastName ||
-            !data.street ||
-            !data.houseNumber ||
-            !data.city ||
-            !data.country ||
-            !data.phoneNumber ||
-            !data.email ||
-            !data.password ||
-            !data.confirmPassword ||
-            errors.passwordMissmatch ||
-            errors.passwordLength
-          }
-          variant="primary"
-          type="submit"
-          className="align-self-center"
-        >
-          Submit
-        </Button>
       </Form>
-    </Container>
+    </div>
   );
 };
 
-export default Register;
+export default OrderDetails;

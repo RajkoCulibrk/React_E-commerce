@@ -29,7 +29,11 @@ const AmmountRegulator = ({ product, ammount, setAmmount }) => {
       <Button onClick={() => handleAmmountChange(1)} variant="secondary">
         <FontAwesomeIcon icon={faChevronUp} />
       </Button>
-      <input className="text-center w-50 " readOnly value={ammount} />
+      <input
+        className="text-center ammount_regulator w-50 "
+        readOnly
+        value={ammount}
+      />
       <Button onClick={() => handleAmmountChange(-1)} variant="secondary">
         <FontAwesomeIcon icon={faChevronDown} />
       </Button>

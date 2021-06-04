@@ -63,7 +63,9 @@ export default function useAddNewProduct(product) {
       /* appent post to posts */
 
       /* rediresct user to home */
-      history.push("/");
+      if (product) {
+        history.push("/manageProducts");
+      }
       /* set submitting to false so we hide the spinner */
       setSubmitting(false);
     } catch (err) {

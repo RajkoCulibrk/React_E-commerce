@@ -8,7 +8,7 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { Button, Carousel, Col, Container, Row } from "react-bootstrap";
 import ProductPolicy from "../components/Product/ProductPolicy";
 import useFetchSingleProduct from "../Hooks/FetchSingleProductHook";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import useCheckIfInCart from "../Hooks/CheckIfInCart";
 import { useSelector } from "react-redux";
 
@@ -18,23 +18,31 @@ const Product = () => {
   const { id } = useParams();
   const { cart } = useSelector((state) => state);
   const cartItem = cart.cartItems.find((ci) => ci.product.productId == id);
-
+  const history = useHistory();
   const { data, fetchProduct } = useFetchSingleProduct();
   const { product, loadingProduct } = data;
   const isInCart = useCheckIfInCart(id);
   const { handleAddToCart } = useHandleAddToCart();
   const [ammount, setAmmount] = useState(isInCart ? cartItem.ammount : 1);
 
-  const handleAddToCartButton = () => {
+  const handleAddToCartButton = (orderButton) => {
     if (isInCart) {
+      if (orderButton) {
+        history.push("/cart");
+        return;
+      }
       handleAddToCart(product, 0);
     } else {
       handleAddToCart(product, ammount);
+    }
+    if (orderButton) {
+      history.push("/cart");
     }
   };
 
   useEffect(() => {
     fetchProduct(id);
+    // eslint-disable-next-line
   }, []);
   return (
     <Container fluid>
@@ -59,7 +67,12 @@ const Product = () => {
           <div className="product__cart-buttons w-100 p-3">
             <Row>
               <Col xs={6}>
-                <Button variant="danger" size="lg" block>
+                <Button
+                  onClick={() => handleAddToCartButton(true)}
+                  variant="danger"
+                  size="lg"
+                  block
+                >
                   Order
                 </Button>
               </Col>

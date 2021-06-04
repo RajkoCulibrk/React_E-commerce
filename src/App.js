@@ -15,6 +15,12 @@ import Cart from "./Pages/Cart";
 import AddProduct from "./Pages/AddProduct";
 import ManageProducts from "./Pages/ManageProducts";
 import UpdateProduct from "./Pages/UpdateProduct";
+import ManageCategories from "./Pages/ManageCategories";
+import ManageOrders from "./Pages/ManageOrders";
+import OrderAdmin from "./Pages/OrderAdmin";
+import AdminRouteGuard from "./RouteGuards/AdminRouteGuard";
+import LoggedInRouteGuard from "./RouteGuards/LoggedInRouteGuard";
+import NotLoggedInRouteGuard from "./RouteGuards/NotLoggedInRouteGuard";
 
 function App() {
   if (!localStorage.getItem("cart")) {
@@ -33,14 +39,28 @@ function App() {
 
         <main>
           <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+            <LoggedInRouteGuard path="/login" component={Login} />
+            <LoggedInRouteGuard path="/register" component={Register} />
+
             <Route path="/product/:id" component={Product} />
             <Route path="/cart" component={Cart} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/addProduct" component={AddProduct} />
-            <Route path="/updateProduct/:id" component={UpdateProduct} />
-            <Route path="/manageProducts" component={ManageProducts} />
+
+            <AdminRouteGuard path="/addProduct" component={AddProduct} />
+            <AdminRouteGuard
+              path="/updateProduct/:id"
+              component={UpdateProduct}
+            />
+            <AdminRouteGuard
+              path="/manageProducts"
+              component={ManageProducts}
+            />
+            <AdminRouteGuard
+              path="/manageCategories"
+              component={ManageCategories}
+            />
+
+            <NotLoggedInRouteGuard path="/orders" component={ManageOrders} />
+            <NotLoggedInRouteGuard path="/order/:id" component={OrderAdmin} />
 
             <Route path="/" component={Home} />
           </Switch>
