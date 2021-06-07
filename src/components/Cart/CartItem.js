@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-
+import Currency from "react-currency-formatter";
 import AmmountRegulator from "./AmmountRegulator";
 import { Link } from "react-router-dom";
 
@@ -25,7 +25,10 @@ const CartItem = ({ cartItem }) => {
             <Col sm={7}>
               <h5>{cartItem.product.name}</h5>
               <p>{cartItem.product.description}</p>
-              <p>price: {cartItem.product.price} $</p>
+              <p>
+                price:{" "}
+                <Currency quantity={cartItem.product.price} currency="USD" />
+              </p>
               <p>category: {cartItem.product?.category?.name}</p>
             </Col>
             <Col sm={5} className="d-flex align-items-center">

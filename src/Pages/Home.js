@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import CarauselMultipleItems from "../components/core/Carausel";
 
 import SideNav from "../components/core/SideNav";
 
@@ -13,6 +14,7 @@ const Home = () => {
           <SideNav className="h-100" />
         </Col>
         <Col className=" col-md-9 col-lg-10 m-0 p-0 ">
+          <CarauselMultipleItems />
           <ProductGalery />
         </Col>
       </Row>

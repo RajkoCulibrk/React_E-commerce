@@ -1,19 +1,22 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 /* custom hook for register user page functionality */
-export default function useInput() {
+export default function useInput(prefillUserData) {
   /* input values */
+  const { user } = useSelector((state) => state.user);
+
   const [data, setData] = useState({
     name: "",
     password: "",
     confirmPassword: "",
-    email: "",
-    firstName: "",
-    lastName: "",
-    city: "",
-    country: "",
-    phoneNumber: "",
-    street: "",
-    houseNumber: ""
+    email: prefillUserData ? user.email : "",
+    firstName: prefillUserData ? user.firstName : "",
+    lastName: prefillUserData ? user.lastName : "",
+    city: prefillUserData ? user.city : "",
+    country: prefillUserData ? user.country : "",
+    phoneNumber: prefillUserData ? user.phoneNumber : "",
+    street: prefillUserData ? user.street : "",
+    houseNumber: prefillUserData ? user.houseNumber : ""
   });
 
   const [touched, setTouched] = useState({
@@ -53,5 +56,5 @@ export default function useInput() {
       }
     }
   }
-  return [data, handleChange, errors, touched, setTouched];
+  return [data, handleChange, errors, touched, setTouched, setData];
 }

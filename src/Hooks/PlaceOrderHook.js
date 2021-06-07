@@ -12,6 +12,7 @@ export default function usePlaceOrder() {
       setLoading(true);
       if (data) {
         await axios.post(`orders/kurac`, data);
+        localStorage.setItem("cart", JSON.stringify([]));
       } else {
         await axios.post(`orders/order`);
       }

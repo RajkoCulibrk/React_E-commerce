@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
-
+import Currency from "react-currency-formatter";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { Button, Carousel, Col, Container, Row } from "react-bootstrap";
 import ProductPolicy from "../components/Product/ProductPolicy";
@@ -17,7 +17,7 @@ import AmmountRegulator from "../components/Cart/AmmountRegulator";
 const Product = () => {
   const { id } = useParams();
   const { cart } = useSelector((state) => state);
-  const cartItem = cart.cartItems.find((ci) => ci.product.productId == id);
+  const cartItem = cart.cartItems?.find((ci) => ci.product.productId == id);
   const history = useHistory();
   const { data, fetchProduct } = useFetchSingleProduct();
   const { product, loadingProduct } = data;
@@ -56,13 +56,15 @@ const Product = () => {
                 alt="First slide"
               />
             </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src="https://res.cloudinary.com/dui23wclz/image/upload/v1621103753/bjjx8lq4y4uhf0nzj9gp.jpg"
-                alt="First slide"
-              />
-            </Carousel.Item>
+            {product?.images.map((image) => (
+              <Carousel.Item key={image.productImageId}>
+                <img
+                  className="d-block w-100"
+                  src={image.publicUrl}
+                  alt="First slide"
+                />
+              </Carousel.Item>
+            ))}
           </Carousel>
           <div className="product__cart-buttons w-100 p-3">
             <Row>
@@ -93,7 +95,12 @@ const Product = () => {
           <h4 className="p-3">{product?.name}</h4>
 
           <div className="product__price border-dark border-top border-bottom p-3">
-            <div>Cena: {product?.price} $</div>
+            <div>
+              Price:{" "}
+              {product?.price && (
+                <Currency quantity={product?.price} currency="USD" />
+              )}
+            </div>
             <div>Shipping: Free</div>
             <div>Category: {product?.category?.name}</div>
           </div>

@@ -9,7 +9,7 @@ const CartIcon = ({ classes }) => {
   return (
     <Link to="/cart" className={classes + " position-relative"}>
       <span className="badge badge-info cartIcon__number">
-        {cart.cartItems.length}
+        {cart.cartItems?.length}
       </span>
       <FontAwesomeIcon icon={faCartPlus} />
     </Link>

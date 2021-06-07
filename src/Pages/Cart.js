@@ -7,6 +7,7 @@ import { getCartItems } from "../Redux/Actions/CartActions";
 import emptyCart from "../images/empty-cart.svg";
 import OrderDetails from "../components/Cart/OrderDetails";
 import useInput from "../Hooks/RegisterLoginHook";
+
 const Cart = () => {
   const dispatch = useDispatch();
   const {

@@ -5,9 +5,11 @@ import usePlaceOrder from "../../Hooks/PlaceOrderHook";
 import useInput from "../../Hooks/RegisterLoginHook";
 import LoadingSpinner from "../core/LoadingSpinner";
 import OrderDetails from "./OrderDetails";
+import Currency from "react-currency-formatter";
 
 const CartDetails = () => {
   const [data, handleChange, errors, touched, setTouched] = useInput();
+  const { user } = useSelector((state) => state.user);
   const { placeOrder, loading } = usePlaceOrder();
   const cart = useSelector((state) => state.cart);
   const total = cart.cartItems.length
@@ -17,14 +19,18 @@ const CartDetails = () => {
     : 0;
 
   const handleOrder = () => {
-    const products = cart.cartItems.map((cartItem) => {
-      return {
-        ammount: cartItem.ammount,
-        productId: cartItem.product.productId
-      };
-    });
-    const payload = { products, ...data };
-    placeOrder(payload);
+    if (user) {
+      placeOrder();
+    } else {
+      const products = cart.cartItems.map((cartItem) => {
+        return {
+          ammount: cartItem.ammount,
+          productId: cartItem.product.productId
+        };
+      });
+      const payload = { products, ...data };
+      placeOrder(payload);
+    }
   };
 
   return (
@@ -33,27 +39,31 @@ const CartDetails = () => {
       className="d-flex flex-column justify-content-center cart_details"
     >
       <h5 className="text-center">Total :</h5>
-      <p className="text-center">{total} $</p>
+      <p className="text-center">
+        <Currency quantity={total} currency="USD" />
+      </p>
       <button
         disabled={
           !cart.cartItems.length ||
-          !data.firstName ||
-          !data.lastName ||
-          !data.street ||
-          !data.houseNumber ||
-          !data.city ||
-          !data.country ||
-          !data.phoneNumber ||
-          !data.email
+          (!data.firstName && !user) ||
+          (!data.lastName && !user) ||
+          (!data.street && !user) ||
+          (!data.houseNumber && !user) ||
+          (!data.city && !user) ||
+          (!data.country && !user) ||
+          (!data.phoneNumber && !user) ||
+          (!data.email && !user)
         }
         onClick={() => handleOrder()}
         className="btn btn-primary"
       >
         {loading ? <LoadingSpinner /> : "Place order"}
       </button>
-      <OrderDetails
-        useInput={{ data, handleChange, errors, touched, setTouched }}
-      />
+      {!user && (
+        <OrderDetails
+          useInput={{ data, handleChange, errors, touched, setTouched }}
+        />
+      )}
     </Container>
   );
 };

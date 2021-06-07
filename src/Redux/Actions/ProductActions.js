@@ -8,7 +8,6 @@ export const getProducts = createAsyncThunk(
     try {
       const response = await axios.get("products");
 
-      console.log(response.data);
       return response.data;
     } catch (err) {
       if (err.response?.data.msg) {

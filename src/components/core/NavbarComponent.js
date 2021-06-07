@@ -45,8 +45,8 @@ const NavbarComponent = () => {
 
           {!user?.isAdmin && user && (
             <NavDropdown title="My Space" id="collasible-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/manageProducts">
-                Account data
+              <NavDropdown.Item as={Link} to="/account">
+                Account info
               </NavDropdown.Item>
 
               <NavDropdown.Item as={Link} to="/orders">

@@ -18,5 +18,5 @@ export default function useFetchSingleProduct() {
     }
   };
 
-  return { data, fetchProduct };
+  return { data, fetchProduct, setData };
 }

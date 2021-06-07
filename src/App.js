@@ -21,6 +21,7 @@ import OrderAdmin from "./Pages/OrderAdmin";
 import AdminRouteGuard from "./RouteGuards/AdminRouteGuard";
 import LoggedInRouteGuard from "./RouteGuards/LoggedInRouteGuard";
 import NotLoggedInRouteGuard from "./RouteGuards/NotLoggedInRouteGuard";
+import AccountInfo from "./Pages/AccountInfo";
 
 function App() {
   if (!localStorage.getItem("cart")) {
@@ -59,6 +60,7 @@ function App() {
               component={ManageCategories}
             />
 
+            <NotLoggedInRouteGuard path="/account" component={AccountInfo} />
             <NotLoggedInRouteGuard path="/orders" component={ManageOrders} />
             <NotLoggedInRouteGuard path="/order/:id" component={OrderAdmin} />
 

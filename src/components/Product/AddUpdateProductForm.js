@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button, Col, Figure, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import useAddNewProduct from "../../Hooks/AddNewProduct";
@@ -22,7 +22,13 @@ const AddUpdateProductForm = ({ product }) => {
   const handleImageUpload = () => {
     uploadInput.current.click();
   };
-
+  useEffect(() => {
+    if (!product) {
+      setData({ ...data, categoryId: categories[0]?.categoryId });
+    }
+    // eslint-disable-next-line
+  }, [categories]);
+  console.log("render");
   return (
     <Form
       onSubmit={(e) => submitData(e, product?.productId)}
@@ -31,6 +37,7 @@ const AddUpdateProductForm = ({ product }) => {
       <h4 className="text-center">
         {product ? "Update Product" : "New Product"}
       </h4>
+      {JSON.stringify(data)}
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Name</Form.Label>
         <Form.Control
@@ -58,7 +65,7 @@ const AddUpdateProductForm = ({ product }) => {
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Category</Form.Label>
             <Form.Control
-              value={data.categoryId}
+              value={data.categoryId ? data.categoryId : 5}
               onChange={(e) => handleChange(e)}
               name="categoryId"
               as="select"
@@ -103,7 +110,11 @@ const AddUpdateProductForm = ({ product }) => {
         />
         <Figure.Caption>
           Main picture.{" "}
-          <button onClick={() => handleImageUpload()} className="btn btn-dark">
+          <button
+            type="button"
+            onClick={() => handleImageUpload()}
+            className="btn btn-dark"
+          >
             {src ? "Change" : "Chose"}
           </button>{" "}
         </Figure.Caption>

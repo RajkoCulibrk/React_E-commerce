@@ -3,13 +3,14 @@ import axios from "../Utility/axiosConfiguration";
 import { toast } from "react-toastify";
 
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 /* custom hook for adding new post */
 export default function useAddNewProduct(product) {
   const [data, setData] = useState({
     name: product ? product.name : "",
     price: product ? product.price : "",
     description: product ? product.description : "",
-    categoryId: product ? product?.category?.categoryId : ""
+    categoryId: product ? product?.category?.categoryId : null
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
