@@ -82,14 +82,50 @@ const AddUpdateProductForm = ({ product }) => {
         </Col>
       </Form.Row>
 
+      <Form.Row>
+        <Col xs={6}>
+          <Form.Group className="mb-3" controlId="new">
+            <Form.Check
+              defaultChecked={data.new}
+              onChange={(e) => handleChange(e)}
+              type="checkbox"
+              name="new"
+              label="Mark as new"
+            />
+          </Form.Group>
+        </Col>
+        <Col xs={6}>
+          <Form.Group className="mb-3" controlId="featured">
+            <Form.Check
+              defaultChecked={data.featured}
+              onChange={(e) => handleChange(e)}
+              name="featured"
+              type="checkbox"
+              label="Mark as featured"
+            />
+          </Form.Group>
+        </Col>
+      </Form.Row>
+
       <Form.Group controlId="formBasicPassword">
         <Form.Label>Description</Form.Label>
         <Form.Control
           name="description"
           value={data.description}
           onChange={(e) => handleChange(e)}
-          type="text"
+          as="textarea"
           placeholder="Description"
+        />
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Short Description</Form.Label>
+        <Form.Control
+          name="shortDescription"
+          value={data.shortDescription}
+          onChange={(e) => handleChange(e)}
+          as="textarea"
+          placeholder="Short Description"
         />
       </Form.Group>
       <Form.Group className={"d-none"}>

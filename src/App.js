@@ -1,7 +1,12 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarComponent from "./components/core/NavbarComponent";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useLocation
+} from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
@@ -22,54 +27,56 @@ import AdminRouteGuard from "./RouteGuards/AdminRouteGuard";
 import LoggedInRouteGuard from "./RouteGuards/LoggedInRouteGuard";
 import NotLoggedInRouteGuard from "./RouteGuards/NotLoggedInRouteGuard";
 import AccountInfo from "./Pages/AccountInfo";
+import {
+  getFeaturedProducts,
+  getNewProducts
+} from "./Redux/Actions/ProductActions";
 
 function App() {
   if (!localStorage.getItem("cart")) {
     localStorage.setItem("cart", JSON.stringify([]));
   }
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserData());
 
     dispatch(getCategories());
+    dispatch(getNewProducts());
+    dispatch(getFeaturedProducts());
   }, [dispatch]);
   return (
-    <Router>
-      <div className="App">
-        <NavbarComponent />
+    <div className="App">
+      <NavbarComponent />
 
-        <main>
-          <Switch>
-            <LoggedInRouteGuard path="/login" component={Login} />
-            <LoggedInRouteGuard path="/register" component={Register} />
+      <main>
+        <Switch>
+          <LoggedInRouteGuard path="/login" component={Login} />
+          <LoggedInRouteGuard path="/register" component={Register} />
 
-            <Route path="/product/:id" component={Product} />
-            <Route path="/cart" component={Cart} />
+          <Route path="/product/:id" component={Product} />
+          <Route path="/cart" component={Cart} />
 
-            <AdminRouteGuard path="/addProduct" component={AddProduct} />
-            <AdminRouteGuard
-              path="/updateProduct/:id"
-              component={UpdateProduct}
-            />
-            <AdminRouteGuard
-              path="/manageProducts"
-              component={ManageProducts}
-            />
-            <AdminRouteGuard
-              path="/manageCategories"
-              component={ManageCategories}
-            />
+          <AdminRouteGuard path="/addProduct" component={AddProduct} />
+          <AdminRouteGuard
+            path="/updateProduct/:id"
+            component={UpdateProduct}
+          />
+          <AdminRouteGuard path="/manageProducts" component={ManageProducts} />
+          <AdminRouteGuard
+            path="/manageCategories"
+            component={ManageCategories}
+          />
 
-            <NotLoggedInRouteGuard path="/account" component={AccountInfo} />
-            <NotLoggedInRouteGuard path="/orders" component={ManageOrders} />
-            <NotLoggedInRouteGuard path="/order/:id" component={OrderAdmin} />
+          <NotLoggedInRouteGuard path="/account" component={AccountInfo} />
+          <NotLoggedInRouteGuard path="/orders" component={ManageOrders} />
+          <NotLoggedInRouteGuard path="/order/:id" component={OrderAdmin} />
 
-            <Route path="/" component={Home} />
-          </Switch>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+          <Route path="/" component={Home} />
+        </Switch>
+      </main>
+      <Footer />
+    </div>
   );
 }
 

@@ -35,8 +35,9 @@ body {
   width: 18rem;
   transition: all 0.3s ease;
   box-shadow: 1px 1px 6px black;
-  overflow: hidden;
+
   height: fit-content;
+  position: relative;
 }
 .product__card:hover {
   box-shadow: 2px 2px 6px black;
@@ -61,6 +62,13 @@ body {
 }
 .product__card img:hover {
   transform: scale(1.05);
+}
+
+.product__card__new {
+  position: absolute;
+  top: -10px;
+  width: 70px;
+  left: -10px;
 }
 
 .card-title {
@@ -154,9 +162,10 @@ body {
   left: 0;
 }
 
+/* carausel item */
 .turac {
-  max-width: 100%;
-  height: 250px;
+  max-width: 200px;
+  height: 200px;
   transition: all 0.2s ease;
 }
 .turac:hover {
@@ -168,13 +177,36 @@ body {
 }
 
 .carausel_item:hover {
-  background: white;
-  border-radius: 2rem;
+  background: rgb(206, 193, 193);
+  border-radius: 1rem;
 }
 
 .carausel_item {
   transition: all 0.2s ease;
 }
+
+.carausel_item__image_container__product_title {
+  height: 50px;
+}
+/* carausel */
+.carausel_multiple {
+  background-color: rgba(191, 194, 202, 0.733);
+}
+/* pagination */
+.per_page {
+  word-wrap: normal;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.xxx {
+  font-style: italic;
+}
+
 @media screen and (max-width: 768px) {
   .product__card {
     width: 100%;

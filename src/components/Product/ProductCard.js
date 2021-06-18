@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-
+import newTag from "../../images/newProduct.png";
 import { Link, useLocation } from "react-router-dom";
 
 import Currency from "react-currency-formatter";
@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
       <Card.Body className="text-center">
         <Card.Title>{product.name}</Card.Title>
         <Card.Text style={{ height: "50px" }}>
-          {product.description.substring(0, 30)}
+          {product?.shortDescription?.substring(0, 100)}
         </Card.Text>
         <Card.Text className="font-italic">
           <Currency quantity={product.price} currency="USD" />
@@ -33,6 +33,9 @@ const ProductCard = ({ product }) => {
           <AddToCartButton product={product} />
         )}
       </Card.Body>
+      {product.new && (
+        <img src={newTag} className="product__card__new" alt="new" />
+      )}
     </Card>
   );
 };

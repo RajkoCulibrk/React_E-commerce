@@ -10,12 +10,23 @@ export default function useAddNewProduct(product) {
     name: product ? product.name : "",
     price: product ? product.price : "",
     description: product ? product.description : "",
-    categoryId: product ? product?.category?.categoryId : null
+    shortDescription: product
+      ? product.shortDescription
+        ? product.shortDescription
+        : ""
+      : "",
+    categoryId: product ? product?.category?.categoryId : null,
+    new: product ? product?.new : false,
+    featured: product ? product?.featured : false
   });
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, checked, type } = e.target;
+    if (type === "checkbox") {
+      setData({ ...data, [name]: checked });
+    } else {
+      setData({ ...data, [name]: value });
+    }
     /* set input value to the value from the event.target (input in the register page must have the name matching one of the input values variable at the top of the hook) */
-    setData({ ...data, [name]: value });
   };
   /* src is  the image to display instead of the placeholder one */
   const [file, setFile] = useState("");
@@ -41,7 +52,10 @@ export default function useAddNewProduct(product) {
     formData.append("Name", data.name);
     formData.append("Price", data.price);
     formData.append("Description", data.description);
+    formData.append("ShortDescription", data.shortDescription);
     formData.append("CategoryId", data.categoryId);
+    formData.append("New", data.new);
+    formData.append("Featured", data.featured);
     if (ProductId) {
       formData.append("ProductId", ProductId);
     }

@@ -14,9 +14,15 @@ import { useSelector } from "react-redux";
 
 import useHandleAddToCart from "../Hooks/UseAddRemoveFromCart";
 import AmmountRegulator from "../components/Cart/AmmountRegulator";
+import CarauselMultipleItems from "../components/core/Carausel";
+import LoadingSpinner from "../components/core/LoadingSpinner";
 const Product = () => {
   const { id } = useParams();
-  const { cart } = useSelector((state) => state);
+
+  const {
+    cart,
+    products: { featuredProducts }
+  } = useSelector((state) => state);
   const cartItem = cart.cartItems?.find((ci) => ci.product.productId == id);
   const history = useHistory();
   const { data, fetchProduct } = useFetchSingleProduct();
@@ -39,16 +45,22 @@ const Product = () => {
       history.push("/cart");
     }
   };
-
+  console.log(ammount);
   useEffect(() => {
     fetchProduct(id);
+    setAmmount(isInCart ? cartItem.ammount : 1);
     // eslint-disable-next-line
-  }, []);
+  }, [id]);
   return (
     <Container fluid>
       <Row>
         <Col xs={12} md={6} className="d-flex flex-column align-items-center">
           <Carousel className="product__carousel">
+            {loadingProduct && (
+              <Carousel.Item className="d-flex justify-content-center">
+                <LoadingSpinner dimensions={"300px"} />
+              </Carousel.Item>
+            )}
             <Carousel.Item>
               <img
                 className="d-block w-100"
@@ -122,6 +134,12 @@ const Product = () => {
             <h5>Description</h5>
             <p className="lead">{product?.description}</p>
           </div>
+        </Col>
+        <Col xs={12}>
+          <CarauselMultipleItems
+            title={"Featured"}
+            products={featuredProducts}
+          />
         </Col>
       </Row>
     </Container>

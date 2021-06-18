@@ -24,7 +24,11 @@ const CartItem = ({ cartItem }) => {
           <Row>
             <Col sm={7}>
               <h5>{cartItem.product.name}</h5>
-              <p>{cartItem.product.description}</p>
+              <p>
+                {cartItem.product.shortDescription
+                  ? cartItem.product.shortDescription
+                  : cartItem.product.description.substring(0, 50) + "..."}
+              </p>
               <p>
                 price:{" "}
                 <Currency quantity={cartItem.product.price} currency="USD" />

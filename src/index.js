@@ -7,12 +7,16 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./Redux/Store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import { BrowserRouter as Router } from "react-router-dom";
+
 ReactDOM.render(
   <React.StrictMode>
     <ToastContainer />
 
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

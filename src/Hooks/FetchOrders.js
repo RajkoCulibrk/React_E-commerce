@@ -5,16 +5,19 @@ export default function useFetchOrders() {
   const { user } = useSelector((state) => state.user);
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(false);
+  const [pages, setPages] = useState(0);
 
-  const fetchOrders = async () => {
+  const fetchOrders = async (params) => {
     try {
       setLoadingOrders(true);
       if (user.isAdmin) {
-        const { data } = await axios.get("orders/admin");
-        setOrders(data.data);
+        const { data } = await axios.get("orders/admin", { params });
+        setOrders(data.data.data);
+        setPages(data.data.pages);
       } else {
-        const { data } = await axios.get("orders");
-        setOrders(data.data);
+        const { data } = await axios.get("orders", { params });
+        setOrders(data.data.data);
+        setPages(data.data.pages);
       }
 
       setLoadingOrders(false);
@@ -22,5 +25,5 @@ export default function useFetchOrders() {
       setLoadingOrders(false);
     }
   };
-  return { orders, loadingOrders, fetchOrders };
+  return { orders, loadingOrders, fetchOrders, pages };
 }

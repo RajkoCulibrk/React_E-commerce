@@ -10,9 +10,11 @@ const CarauselItem = ({ product }) => {
           to={"/product/" + product.productId}
           style={{ textDecoration: "none", color: "initial" }}
         >
-          <div className="  p-2 w-100 d-flex flex-column text-center justify-content-center carausel_item__image_container mb-2">
+          <div className="  p-2 w-100 d-flex flex-column text-center justify-content-center carausel_item__image_container mb-2 align-items-center">
             <img src={product.publicUrl} className="turac" alt="" />
-            <h5>Naslodv</h5>
+            <h5 className="carausel_item__image_container__product_title">
+              {product.name}
+            </h5>
           </div>
         </Link>
         <AddToCartButton product={product} />

@@ -1,14 +1,12 @@
 import { Container } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { useSelector } from "react-redux";
+
 import CarauselItem from "../Product/CarauselItem";
 
-const CarauselMultipleItems = ({ title }) => {
-  const { products } = useSelector((state) => state.products);
-
+const CarauselMultipleItems = ({ title, products }) => {
   return (
-    <Container fluid className="mt-5 mb-5">
+    <Container fluid className="mt-5 mb-5 carausel_multiple p-2">
       <h2>{title}</h2>
       <Carousel
         additionalTransfrom={0}
