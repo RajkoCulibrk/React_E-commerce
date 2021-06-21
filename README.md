@@ -2,7 +2,7 @@
 
 This is an E-commerce react application that i have built. In order to see the app in action clone the repository and run the app on your local machine.
 
-For the backend I have a separete .NET core app hosted on [Backend](http://rajkoculibrk-001-site1.ctempurl.com/swagger/index.html).
+For the backend I have a separete .NET core API that I have built and  hosted on [Backend](http://rajkoculibrk-001-site1.ctempurl.com/swagger/index.html).
 
 ## Available Scripts
 
