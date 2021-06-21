@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
-import { useSelector } from "react-redux";
+
 import { useHistory, useLocation } from "react-router";
 import { isMobile, isTablet } from "react-device-detect";
 

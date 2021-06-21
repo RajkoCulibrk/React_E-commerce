@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Form } from "react-bootstrap";
 
 const OrderDetails = ({ useInput }) => {
-  const { data, handleChange, errors, touched, setTouched } = useInput;
+  const { data, handleChange, touched, setTouched } = useInput;
   return (
     <div>
       <Form className="d-flex flex-column mt-3 ">

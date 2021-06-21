@@ -6,17 +6,8 @@ import productPlaceholder from "../../images/product_placeholder.png";
 
 const AddUpdateProductForm = ({ product }) => {
   const { categories } = useSelector((state) => state.categories);
-  const {
-    data,
-    handleSelect,
-    src,
-    handleChange,
-    submitData,
-    submitting,
-    file,
-    setData,
-    setSrc
-  } = useAddNewProduct(product);
+  const { data, handleSelect, src, handleChange, submitData, setData } =
+    useAddNewProduct(product);
   const uploadInput = useRef();
 
   const handleImageUpload = () => {
@@ -28,7 +19,7 @@ const AddUpdateProductForm = ({ product }) => {
     }
     // eslint-disable-next-line
   }, [categories]);
-  console.log("render");
+
   return (
     <Form
       onSubmit={(e) => submitData(e, product?.productId)}
@@ -37,7 +28,7 @@ const AddUpdateProductForm = ({ product }) => {
       <h4 className="text-center">
         {product ? "Update Product" : "New Product"}
       </h4>
-      {JSON.stringify(data)}
+
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Name</Form.Label>
         <Form.Control

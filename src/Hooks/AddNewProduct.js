@@ -3,7 +3,7 @@ import axios from "../Utility/axiosConfiguration";
 import { toast } from "react-toastify";
 
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 /* custom hook for adding new post */
 export default function useAddNewProduct(product) {
   const [data, setData] = useState({
@@ -63,9 +63,9 @@ export default function useAddNewProduct(product) {
       /* set submitting to true so we show the spinner */
       setSubmitting(true);
       if (ProductId) {
-        const { data } = await axios.put("Products", formData);
+        await axios.put("Products", formData);
       } else {
-        const { data } = await axios.post("Products", formData);
+        await axios.post("Products", formData);
       }
 
       /* show message that post has been successfully uploaded */
@@ -77,12 +77,11 @@ export default function useAddNewProduct(product) {
       );
       /* appent post to posts */
 
-      /* rediresct user to home */
-      if (product) {
-        history.push("/manageProducts");
-      }
       /* set submitting to false so we hide the spinner */
       setSubmitting(false);
+      /* redirect user to manageProducts */
+
+      history.push("/manageProducts");
     } catch (err) {
       console.log(err.response);
       /* set submitting to false so we hide the spinner */

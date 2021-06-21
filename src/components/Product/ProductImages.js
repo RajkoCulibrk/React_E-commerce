@@ -5,8 +5,10 @@ import useAddProductImage from "../../Hooks/AddProductImage";
 import productPlaceholder from "../../images/product_placeholder.png";
 import ProductImage from "./ProductImage";
 const ProductImages = ({ data, setData }) => {
-  const { file, src, submitting, handleSelect, uploadPicture } =
-    useAddProductImage(data, setData);
+  const { src, submitting, handleSelect, uploadPicture } = useAddProductImage(
+    data,
+    setData
+  );
   const uploadInput = useRef();
   const handleImageUpload = () => {
     uploadInput.current.click();

@@ -13,7 +13,7 @@ const builderCases = (builder) => {
     state.cartItems = [];
   });
   builder.addCase(addToCart.fulfilled, (state, { payload }) => {
-    console.log(payload, "pajoload");
+    // eslint-disable-next-line
     if (payload.ammount == 0) {
       state.cartItems = state.cartItems.filter(
         (ci) => ci.product.productId !== payload.product.productId

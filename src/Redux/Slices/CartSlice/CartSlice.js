@@ -17,6 +17,7 @@ export const cartSlice = createSlice({
     },
     addToCartNotLoggedIn: (state, { payload }) => {
       let cart = JSON.parse(localStorage.getItem("cart"));
+      // eslint-disable-next-line
       if (payload.ammount == 0) {
         let index = cart.findIndex((ci) => {
           return ci.product.productId === payload.product.productId;

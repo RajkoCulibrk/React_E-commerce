@@ -16,10 +16,10 @@ const Login = () => {
     dispatch(login({ email: data.email, password: data.password }));
   };
   return (
-    <Container className="d-flex justify-content-center">
+    <Container fluid className="d-flex justify-content-center">
       <Form
         onSubmit={(e) => handleSubmit(e)}
-        className="w-50 d-flex flex-column  login_register_form"
+        className="d-flex flex-column login_register_form"
       >
         <h3 className="text-center">Login</h3>
         <Form.Group controlId="formBasicEmail">
@@ -32,9 +32,12 @@ const Login = () => {
             name="email"
             placeholder="Enter email"
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
+
+          {touched.email && !data.email && (
+            <Form.Text className="invalid-input">
+              Please provide your email.
+            </Form.Text>
+          )}
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -47,6 +50,11 @@ const Login = () => {
             name="password"
             placeholder="Password"
           />
+          {touched.password && !data.password && (
+            <Form.Text className="invalid-input">
+              Please provide your password.
+            </Form.Text>
+          )}
         </Form.Group>
 
         <Button variant="primary" type="submit" className="align-self-center">

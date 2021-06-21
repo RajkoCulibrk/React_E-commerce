@@ -1,13 +1,11 @@
 import React from "react";
 import { Col, Container, Form, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import useInput from "../Hooks/RegisterLoginHook";
 import useUpdateAccount from "../Hooks/UseUpdateAccount";
 import LoadingSpinner from "../components/core/LoadingSpinner";
 
 const AccountInfo = () => {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  // eslint-disable-next-line
   const [data, handleChange, errors, touched, setTouched] = useInput(true);
   const { submitting, updateAccount } = useUpdateAccount();
   const handleSubmit = (e) => {

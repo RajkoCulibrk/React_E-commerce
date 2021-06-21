@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Form, InputGroup } from "react-bootstrap";
+import { Button, Container, Form, InputGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createCategory,

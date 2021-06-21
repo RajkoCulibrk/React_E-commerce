@@ -8,7 +8,6 @@ export const getCartItems = createAsyncThunk(
     try {
       const response = await axios.get("cart");
 
-      console.log(response.data);
       return response.data.data;
     } catch (err) {
       if (err.response?.data.msg) {
@@ -24,10 +23,8 @@ export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async (data, { rejectWithValue }) => {
     try {
-      console.log(data);
       const response = await axios.post("Cart", data);
 
-      console.log(response.data);
       return response.data.data;
     } catch (err) {
       if (err.response?.data.msg) {

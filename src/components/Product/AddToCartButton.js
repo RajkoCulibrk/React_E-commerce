@@ -34,7 +34,7 @@ const AddToCartButton = ({ product }) => {
   return (
     <Button
       onClick={(e) => handleAddToCart(e)}
-      variant={isInCart ? "success" : "primary"}
+      variant={isInCart ? "success" : "warning"}
     >
       {isInCart ? (
         <img width="20px" alt="adsf" src={removeFromCartIcon} />

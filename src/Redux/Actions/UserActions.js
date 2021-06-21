@@ -11,7 +11,7 @@ export const login = createAsyncThunk(
       const response = await axios.post("Auth/Login", data);
       /* set token to localstorage */
       localStorage.setItem("token", response.data.data);
-      console.log(response.data.data);
+
       dispatch(getUserData());
       /* display wellcome message */
       toast.info("Wellcome !", {
@@ -36,7 +36,7 @@ export const register = createAsyncThunk(
       const response = await axios.post("Auth/register", data);
       /* set token to localstorage */
       localStorage.setItem("token", response.data.data);
-      console.log(response.data.data);
+
       dispatch(getUserData());
       /* display wellcome message */
       /*    toast.info("Wellcome !", {

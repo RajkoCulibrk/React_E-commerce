@@ -1,12 +1,16 @@
 import React from "react";
 import { Button, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { logout } from "../../Redux/Slices/UserSlice/UserSlice";
 
 import CartIcon from "./CartIcon";
+import Search from "./Search";
+
 const NavbarComponent = () => {
   const { user } = useSelector((state) => state.user);
+  const location = useLocation();
+
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
@@ -16,16 +20,21 @@ const NavbarComponent = () => {
       <Navbar.Brand as={Link} to="/">
         MyShop
       </Navbar.Brand>
+      {(location.pathname === "/" ||
+        location.pathname === "/manageProducts") && (
+        <div>
+          <Search />
+        </div>
+      )}
       <CartIcon classes={"d-block btn btn-warning  d-lg-none ml-auto"} />
 
       <Navbar.Toggle
         className="align-self-end ml-2"
         aria-controls="responsive-navbar-nav"
       />
+
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
           {user?.isAdmin && (
             <NavDropdown title="Admin" id="collasible-nav-dropdown">
               <NavDropdown.Item as={Link} to="/manageProducts">

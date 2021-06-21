@@ -1,7 +1,11 @@
 import axios from "axios";
+import https from "https";
 
 const instance = axios.create({
-  baseURL: "https://localhost:44334/api/"
+  baseURL: "http://rajkoculibrk-001-site1.ctempurl.com/api/",
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false
+  })
 });
 /* if there is a token in local storage set authorization header Bearer token before each call to backend */
 instance.interceptors.request.use(

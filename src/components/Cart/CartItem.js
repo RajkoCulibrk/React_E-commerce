@@ -33,7 +33,12 @@ const CartItem = ({ cartItem }) => {
                 price:{" "}
                 <Currency quantity={cartItem.product.price} currency="USD" />
               </p>
-              <p>category: {cartItem.product?.category?.name}</p>
+              <p>
+                category:{" "}
+                {cartItem.product?.category?.name
+                  ? cartItem.product?.category?.name
+                  : "Unknown"}
+              </p>
             </Col>
             <Col sm={5} className="d-flex align-items-center">
               <AmmountRegulator

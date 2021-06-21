@@ -18,9 +18,11 @@ const OrderDetails = ({ orderId }) => {
   } = useFetchSingleOrder();
   const { deleting, deleteOrder } = useDeleteOrder();
   /* const [confirmed, setConfirmed] = useState(false); */
+
   useEffect(() => {
     fetchOrder(orderId);
-  }, []);
+    // eslint-disable-next-line
+  }, [orderId]);
   return (
     <Container fluid>
       <h5 className="text-center">Order Details</h5>
@@ -43,7 +45,17 @@ const OrderDetails = ({ orderId }) => {
             </tr>
             <tr>
               <td>Date ordered</td>
-              <td>{order?.createdAt}</td>
+              <td>
+                {order?.createdAt &&
+                  new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                  }).format(new Date(order?.createdAt))}
+              </td>
             </tr>
             <tr>
               <td>Street</td>

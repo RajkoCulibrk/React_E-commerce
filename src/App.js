@@ -1,12 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarComponent from "./components/core/NavbarComponent";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useLocation
-} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
@@ -31,6 +26,7 @@ import {
   getFeaturedProducts,
   getNewProducts
 } from "./Redux/Actions/ProductActions";
+import ScrollToTop from "./components/core/ScrollToTop";
 
 function App() {
   if (!localStorage.getItem("cart")) {
@@ -44,7 +40,17 @@ function App() {
     dispatch(getCategories());
     dispatch(getNewProducts());
     dispatch(getFeaturedProducts());
+    const toTop = document.querySelector(".to_top");
+    toTop.style.display = "none";
+    document.addEventListener("scroll", () => {
+      if (window.pageYOffset > 1000) {
+        toTop.style.display = "block";
+      } else {
+        toTop.style.display = "none";
+      }
+    });
   }, [dispatch]);
+
   return (
     <div className="App">
       <NavbarComponent />
@@ -75,6 +81,7 @@ function App() {
           <Route path="/" component={Home} />
         </Switch>
       </main>
+      <ScrollToTop />
       <Footer />
     </div>
   );

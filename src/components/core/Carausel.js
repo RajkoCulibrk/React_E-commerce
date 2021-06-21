@@ -1,13 +1,13 @@
 import { Container } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
+import LoadingSpinner from "./LoadingSpinner";
 import CarauselItem from "../Product/CarauselItem";
 
-const CarauselMultipleItems = ({ title, products }) => {
+const CarauselMultipleItems = ({ title, products, loading }) => {
   return (
     <Container fluid className="mt-5 mb-5 carausel_multiple p-2">
-      <h2>{title}</h2>
+      <h2 className="font-weight-bold">{title}</h2>
       <Carousel
         additionalTransfrom={0}
         arrows
@@ -58,6 +58,10 @@ const CarauselMultipleItems = ({ title, products }) => {
         {products.map((product) => (
           <CarauselItem key={product.productId} product={product} />
         ))}
+        {loading &&
+          [...Array(4)].map((_, index) => (
+            <LoadingSpinner key={index} dimensions={"200px"} />
+          ))}
       </Carousel>
     </Container>
   );

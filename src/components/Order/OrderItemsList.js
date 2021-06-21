@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import useFetchOrderItems from "../../Hooks/FetchOrderItems";
 
 const OrderItemsList = ({ orderId }) => {
-  const { orderItems, loadingOrderItems, fetchOrderItems } =
-    useFetchOrderItems();
+  const { orderItems, fetchOrderItems } = useFetchOrderItems();
+
   useEffect(() => {
     fetchOrderItems(orderId);
-  }, []);
+    // eslint-disable-next-line
+  }, [orderId]);
   return (
     <Container>
       <h5 className="text-center">Order Items</h5>

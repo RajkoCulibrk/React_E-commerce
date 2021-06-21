@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "../Utility/axiosConfiguration";
 import { toast } from "react-toastify";
 export default function useFetchSingleOrder() {
@@ -7,12 +7,20 @@ export default function useFetchSingleOrder() {
   const [loadingConfirmed, setLoadingConfirmed] = useState(false);
   const [loadingSent, setLoadingSent] = useState(false);
 
+  const mounted = useRef(true);
+  useEffect(() => {
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
   const fetchOrder = async (id) => {
     try {
       setLoadingOrder(true);
       const { data } = await axios.get("orders/" + id);
-      setOrder(data.data);
-      setLoadingOrder(false);
+      if (mounted.current) {
+        setOrder(data.data);
+        setLoadingOrder(false);
+      }
     } catch (error) {
       setLoadingOrder(false);
     }

@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 body,
 html,
 * {
   font-family: "Open Sans", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
 }
 body::-webkit-scrollbar {
   width: 6px;
@@ -29,6 +33,16 @@ body {
 }
 .navbar {
   background: turquoise !important;
+  z-index: 99999999 !important;
+}
+.navbar-brand {
+  font-family: "Lobster";
+}
+/* banner */
+.banner_image {
+  display: block;
+  width: 60%;
+  margin: auto;
 }
 /* product card */
 .product__card {
@@ -84,7 +98,14 @@ body {
   overflow-y: scroll;
   border-top: 1px double white;
 }
-
+.sidenav-content__section_title {
+  color: rgb(58, 53, 53);
+  font-weight: bold;
+  font-style: italic;
+  letter-spacing: 3px;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
 .sidenav-content__categories::-webkit-scrollbar {
   width: 8px;
 }
@@ -99,6 +120,11 @@ body {
   padding-left: 2rem;
   padding: 0.5rem 2rem;
   transition: all 0.1s ease;
+  cursor: pointer;
+}
+
+.sidenav-content__categories__category--active {
+  background: rgb(146, 143, 143) !important;
 }
 
 .sidenav-content__categories__category:hover {
@@ -146,12 +172,13 @@ body {
   border-radius: 1rem;
   padding: 1rem;
   margin-top: 2rem;
+  min-width: 40%;
   max-width: 50%;
 }
 
 /* sidenav */
 .sidenav_container {
-  background: rgba(94, 116, 116, 0.377);
+  background: rgba(13, 131, 131, 0.377);
 }
 .product_image {
   position: relative;
@@ -160,6 +187,11 @@ body {
   position: absolute !important;
   top: 0;
   left: 0;
+}
+
+/* invalid input */
+.invalid-input {
+  color: red;
 }
 
 /* carausel item */
@@ -207,12 +239,54 @@ body {
   font-style: italic;
 }
 
+.to_top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.mobile_side_nav_button {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 999999;
+}
+
+/* mobile sidenav container */
+.mobile_side_nav_container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgb(202, 199, 187);
+  z-index: 2002;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+.sidenav-content--my_margin {
+  margin-top: 7rem;
+}
+
+footer {
+  background-color: rgb(34, 41, 40);
+}
 @media screen and (max-width: 768px) {
   .product__card {
     width: 100%;
   }
+  .login_register_form {
+    width: 100% !important;
+    max-width: 100%;
+  }
   .product__card__image-container {
     width: 100% !important;
     height: auto;
+  }
+
+  .banner_image {
+    width: 100%;
   }
 }

@@ -7,8 +7,8 @@ export default function useUpdateAccount() {
   const updateAccount = async (updateData) => {
     try {
       setSubmitting(true);
-      const { data } = await axios.put("Users", updateData);
-      console.log(data.data);
+      await axios.put("Users", updateData);
+
       setSubmitting(false);
       toast.success("Account updated successfully !", {
         position: toast.POSITION.BOTTOM_CENTER

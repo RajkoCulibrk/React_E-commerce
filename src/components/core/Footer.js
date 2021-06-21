@@ -5,7 +5,7 @@ import { faCopyright } from "@fortawesome/free-solid-svg-icons";
 const Footer = () => {
   return (
     <footer>
-      <Container className="bg-dark" fluid>
+      <Container fluid>
         <Row className="text-white p-2">
           <Col
             xs={12}

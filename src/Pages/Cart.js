@@ -5,8 +5,6 @@ import CartDetails from "../components/Cart/CartDetails";
 import CartItem from "../components/Cart/CartItem";
 import { getCartItems } from "../Redux/Actions/CartActions";
 import emptyCart from "../images/empty-cart.svg";
-import OrderDetails from "../components/Cart/OrderDetails";
-import useInput from "../Hooks/RegisterLoginHook";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -23,12 +21,13 @@ const Cart = () => {
   return (
     <Container fluid>
       <Row>
-        <Col md={8} className="d-flex flex-column align-items-center">
+        <Col md={8} className="d-flex flex-column align-items-center ">
           {!cart.cartItems.length && (
-            <img width="300px" src={emptyCart} alt="empty cart" />
-          )}
-          {!cart.cartItems.length && (
-            <Alert variant={"info"}>Your cart is empty !</Alert>
+            <Container className="d-flex flex-column align-items-center ">
+              <img width="300px" src={emptyCart} alt="empty cart" />
+
+              <Alert variant={"info"}>Your cart is empty !</Alert>
+            </Container>
           )}
 
           {cart.cartItems.map((cartItem) => (

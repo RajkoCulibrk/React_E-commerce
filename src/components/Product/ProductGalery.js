@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Container, Row } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { getProducts } from "../../Redux/Actions/ProductActions";
@@ -9,6 +9,9 @@ import PaginationComponent from "../core/PaginationComponent";
 import ProductCard from "./ProductCard";
 import LoadingSpinner from "../core/LoadingSpinner";
 import NoContent from "../core/NoContent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import SideNavContent from "../core/SideNavContent";
 
 const ProductGalery = () => {
   const { products, pages, loadingProducts } = useSelector(
@@ -22,6 +25,7 @@ const ProductGalery = () => {
   const page = params.get("page");
   const sortBy = params.get("sortBy");
   const order = params.get("order");
+  const like = params.get("like");
   let perPage = params.get("perPage")
     ? params.get("perPage") * 1
     : isMobile || isTablet
@@ -34,10 +38,25 @@ const ProductGalery = () => {
         pageNumber: page,
         pageSize: perPage,
         sortBy,
-        order
+        order,
+        like
       })
     );
-  }, [dispatch, categoryId, page, perPage, sortBy, order]);
+  }, [dispatch, categoryId, page, perPage, sortBy, order, like]);
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+    console.log("scroll");
+  };
+  const [showSideNav, setShowSideNav] = useState(false);
+  const sideNavRef = useRef();
+  const showHideSideNav = () => {
+    if (showSideNav) {
+      sideNavRef.current.style.transform = "translateX(-100%)";
+    } else {
+      sideNavRef.current.style.transform = "translateX(0%)";
+    }
+    setShowSideNav(!showSideNav);
+  };
   return (
     <Container
       fluid
@@ -52,8 +71,23 @@ const ProductGalery = () => {
           ))
         )}
       </Container>
-      {!products.length && !loadingProducts && <NoContent />}
+      {!products.length && !loadingProducts && (
+        <NoContent variant={"info"} text={"No content on this page"} />
+      )}
       <PaginationComponent perPage={perPage} pages={pages} />
+      <div
+        ref={sideNavRef}
+        onScroll={(e) => stopPropagation(e)}
+        className="mobile_side_nav_container"
+      >
+        <SideNavContent noSticky={true} />
+      </div>
+      <Button
+        onClick={() => showHideSideNav()}
+        className=" btn btn-warning d-block d-md-none mobile_side_nav_button"
+      >
+        <FontAwesomeIcon size="lg" icon={faFilter} />
+      </Button>
     </Container>
   );
 };
