@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Read this !!!!!!!!!!!
 
 This is an E-commerce react application that i have built. In order to see the app in action clone the repository and run the app on your local machine.
 
