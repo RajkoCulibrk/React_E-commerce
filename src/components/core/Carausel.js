@@ -7,7 +7,7 @@ import CarauselItem from "../Product/CarauselItem";
 const CarauselMultipleItems = ({ title, products, loading }) => {
   return (
     <Container fluid className="mt-5 mb-5 carausel_multiple p-2">
-      <h2 className="font-weight-bold">{title}</h2>
+      <h2 className="font-weight-bold text-center">{title}</h2>
       <Carousel
         additionalTransfrom={0}
         arrows

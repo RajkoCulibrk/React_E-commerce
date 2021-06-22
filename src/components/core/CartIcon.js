@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
+
 const CartIcon = ({ classes }) => {
   const cart = useSelector((state) => state.cart);
 

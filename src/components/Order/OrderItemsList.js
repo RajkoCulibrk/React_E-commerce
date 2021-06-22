@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useFetchOrderItems from "../../Hooks/FetchOrderItems";
-
+import Currency from "react-currency-formatter";
 const OrderItemsList = ({ orderId }) => {
   const { orderItems, fetchOrderItems } = useFetchOrderItems();
 
@@ -33,9 +33,13 @@ const OrderItemsList = ({ orderId }) => {
                     {oi.product.name}
                   </Link>
                 </td>
-                <td>{oi.price}</td>
+                <td>
+                  <Currency quantity={oi.price} currency="USD" />
+                </td>
                 <td>{oi.ammount}</td>
-                <td>{oi.ammount * oi.price}</td>
+                <td>
+                  <Currency quantity={oi.ammount * oi.price} currency="USD" />
+                </td>
               </tr>
             );
           })}
@@ -43,9 +47,12 @@ const OrderItemsList = ({ orderId }) => {
           <tr>
             <td colSpan="4">Total</td>
             <td>
-              {orderItems.reduce((a, oi) => {
-                return a + oi.price * oi.ammount;
-              }, 0)}
+              <Currency
+                quantity={orderItems.reduce((a, oi) => {
+                  return a + oi.price * oi.ammount;
+                }, 0)}
+                currency="USD"
+              />
             </td>
           </tr>
         </tbody>

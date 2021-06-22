@@ -37,6 +37,7 @@ body {
 }
 .navbar-brand {
   font-family: "Lobster";
+  color: white !important;
 }
 /* banner */
 .banner_image {
@@ -179,6 +180,7 @@ body {
 /* sidenav */
 .sidenav_container {
   background: rgba(13, 131, 131, 0.377);
+  box-shadow: 5px 2px 10px rgb(150, 141, 141);
 }
 .product_image {
   position: relative;
@@ -222,7 +224,8 @@ body {
 }
 /* carausel */
 .carausel_multiple {
-  background-color: rgba(191, 194, 202, 0.733);
+  background-color: rgba(236, 239, 247, 0.733);
+  box-shadow: 2px 2px 10px rgb(128, 123, 123);
 }
 /* pagination */
 .per_page {
@@ -272,6 +275,11 @@ body {
 
 footer {
   background-color: rgb(34, 41, 40);
+}
+
+.logo_icon {
+  color: rgb(251, 253, 253);
+  font-size: 2rem;
 }
 @media screen and (max-width: 768px) {
   .product__card {

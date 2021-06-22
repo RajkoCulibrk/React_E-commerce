@@ -14,6 +14,7 @@ const CartItem = ({ cartItem }) => {
           <Link to={"/product/" + cartItem.product.productId}>
             <img
               width="150px"
+              style={{ margin: "auto", display: "block" }}
               className="rounded"
               src={cartItem.product.publicUrl}
               alt="slika"

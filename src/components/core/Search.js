@@ -7,6 +7,7 @@ import { useHistory, useLocation } from "react-router";
 
 const Search = () => {
   const location = useLocation();
+
   let params = new URLSearchParams(location.search);
   const history = useHistory();
   const like = params.get("like") ? params.get("like") : "";

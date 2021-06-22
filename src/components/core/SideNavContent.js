@@ -37,8 +37,8 @@ const SideNavContent = ({ noSticky }) => {
     <div
       className={` 
        ${
-         noSticky ? "sidenav-content--my_margin " : "position-sticky"
-       }  sidenav-content d-flex flex-column  `}
+         noSticky ? "sidenav-content--my_margin mt-5 " : "position-sticky "
+       }  sidenav-content d-flex flex-column `}
     >
       <h5 className="text-center sidenav-content__section_title ">
         Categories
@@ -85,8 +85,8 @@ const SideNavContent = ({ noSticky }) => {
           Price
         </span>
       </div>
-      <h5 className="text-center sidenav-content__section_title">Order</h5>
-      <div className="sidenav-content__section  d-flex flex-column">
+      <h5 className="text-center sidenav-content__section_title ">Order</h5>
+      <div className="sidenav-content__section  d-flex flex-column ">
         <span
           onClick={() => handleOrder("ASC")}
           className={`${

@@ -49,11 +49,17 @@ const ProductGalery = () => {
   };
   const [showSideNav, setShowSideNav] = useState(false);
   const sideNavRef = useRef();
+  const openCloseRef = useRef();
+
   const showHideSideNav = () => {
     if (showSideNav) {
       sideNavRef.current.style.transform = "translateX(-100%)";
+      openCloseRef.current.style.right = "initial";
+      openCloseRef.current.style.left = "2rem";
     } else {
       sideNavRef.current.style.transform = "translateX(0%)";
+      openCloseRef.current.style.right = "2rem";
+      openCloseRef.current.style.left = "initial";
     }
     setShowSideNav(!showSideNav);
   };
@@ -83,6 +89,7 @@ const ProductGalery = () => {
         <SideNavContent noSticky={true} />
       </div>
       <Button
+        ref={openCloseRef}
         onClick={() => showHideSideNav()}
         className=" btn btn-warning d-block d-md-none mobile_side_nav_button"
       >
