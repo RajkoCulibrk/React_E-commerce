@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Read this !!!!!!!!!!!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is an E-commerce react application that i have built. In order to see the app in action clone the repository and run the app on your local machine.
+
+For the backend I have a separete .NET core API that I have built and  hosted on [Backend](http://rajkoculibrk-001-site1.ctempurl.com/swagger/index.html).
+
+Backend repository [Backend repository](https://github.com/RajkoCulibrk/.NET-API-E-commerce).
 
 ## Available Scripts
 
